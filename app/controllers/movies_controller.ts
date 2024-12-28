@@ -3,6 +3,7 @@ import MovieService from '#services/movie_service';
 import UserService from '#services/user_service';
 import Movie from '#models/movie';
 import cache from '#services/cache_service';
+import redisCache from '#services/rediscache_service';
 
 export default class MoviesController {
   async index({view, params}: HttpContext) {
@@ -17,14 +18,20 @@ export default class MoviesController {
     const movies: Movie[] = [];
     const newMovie: Movie = new Movie();
 
-    const cacheData = cache.get("test-movie");
+    const cacheDataMemory = cache.get("test-movie");
+    console.log(cacheDataMemory);
+    const cacheData = await redisCache.get("test-movie");
+    console.log(`Cached data: ${cacheData}`);
     if(cacheData){
       console.log("cache hit");
+      movies.push(cacheData);
     }else{
       newMovie.id = 1;
       newMovie.title = "Test Movie";
       newMovie.slug = "test-movie";
       movies.push(newMovie);
+      // cache.set("test-movie", newMovie);
+      await redisCache.set("test-movie", newMovie);
     }
     
     newMovie.greet("hello world");
@@ -34,5 +41,13 @@ export default class MoviesController {
       users : await UserService.fetchUsers(),
       movie : movies
   });
+  }
+
+
+  async cacheTest({response} : HttpContext){
+    const cached = await redisCache.get("test-movie");
+    return response.json({
+      cached : cached
+    });
   }
 }
