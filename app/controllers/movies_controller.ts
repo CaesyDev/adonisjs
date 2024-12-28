@@ -4,6 +4,7 @@ import UserService from '#services/user_service';
 import Movie from '#models/movie';
 import cache from '#services/cache_service';
 import redisCache from '#services/rediscache_service';
+import MovieVm from '#view_models/movie';
 
 export default class MoviesController {
   async index({view, params}: HttpContext) {
@@ -14,9 +15,8 @@ export default class MoviesController {
   }
 
   async jsonView({response} : HttpContext) {
-
     const movies: Movie[] = [];
-    const newMovie: Movie = new Movie();
+    const newMovie: MovieVm = new MovieVm();
 
     const cacheDataMemory = cache.get("test-movie");
     console.log(cacheDataMemory);
