@@ -50,4 +50,10 @@ export default class MoviesController {
       cached : cached
     });
   }
+
+  deleteTest({response} : HttpContext){
+    console.log("delete test")
+    //go back to previous page
+    return response.redirect().back();
+  }
 }

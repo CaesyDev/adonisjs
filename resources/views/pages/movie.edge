@@ -9,5 +9,10 @@
 <body>
     <a href="{{route('cool-movie', {id : "howell"})}}">Same Page</a>
     {{ name}}
+    <form action="{{route('delete', {}, { qs: {_method : 'DELETE'} })}}" method="POST">
+        {{ csrfField() }}
+        <input type="text" >
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

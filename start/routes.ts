@@ -14,3 +14,4 @@ router.on('/').render('pages/home')
 router.get("/movies/:id", [MoviesController, 'index']).as("cool-movie").where('id', router.matchers.slug());
 router.get('/json', [MoviesController, 'jsonView']);
 router.get('/cache', [MoviesController, 'cacheTest']);
+router.delete("/delete", [MoviesController, 'deleteTest']).as("delete");
