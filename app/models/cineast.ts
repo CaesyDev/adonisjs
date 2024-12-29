@@ -12,7 +12,7 @@ export default class Cineast extends BaseModel {
   declare lastName: string
 
   @column()
-  declare headShotUrl: string
+  declare headshotUrl: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

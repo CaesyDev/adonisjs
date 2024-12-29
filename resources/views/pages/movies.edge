@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div style="display:flex; flex-wrap:wrap; justify-content:center;">
+        @each((movie, index) in movies)
+
+        <div style="width:350px; margin:10px; padding:20px; border:2px solid red; border-radius:20px; text-align:center">
+            <h1>{{index + 1}}</h1>
+            <img src="{{movie.posterUrl}}" alt="" width="300px" height="300px">
+            <p>{{movie.summary}}</p>
+            <a href="{{route("movie", {'slug' : movie.slug})}}">
+                <button style="background-color:#27282a; color:white;text-align:center;border-radius:10px;padding:15px;">View Movie</button>
+            </a>
+        </div>
+
+    @endeach
+    </div>
+
+</body>
+</html>

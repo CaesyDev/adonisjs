@@ -5,8 +5,26 @@ import Movie from '#models/movie';
 import cache from '#services/cache_service';
 import redisCache from '#services/rediscache_service';
 import MovieVm from '#view_models/movie';
+// import db from '@adonisjs/lucid/services/db'
 
 export default class MoviesController {
+
+  async showMovies({view} : HttpContext) {
+    const movies: Movie[] = await Movie.all();
+
+    // const data = await db.knexRawQuery("SELECT * FROM users");
+    // return data;
+
+    return view.render("pages/movies", {movies});
+  }
+
+  async singleMovie({view, params} : HttpContext) {
+    const slug = params.slug;
+    const movie = await Movie.findBy("slug", slug);
+    
+    return view.render("pages/movie", { movie});
+  }
+
   async index({view, params}: HttpContext) {
     const id = params.id;
     console.log(id);
@@ -57,7 +75,5 @@ export default class MoviesController {
     return response.redirect().back();
   }
 
-  crudOperations({response} : HttpContext){
-    
-  }
+
 }

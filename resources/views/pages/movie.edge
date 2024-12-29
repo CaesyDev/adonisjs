@@ -7,12 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{{route('cool-movie', {id : "howell"})}}">Same Page</a>
-    {{ name}}
+    <h1 style="text-align:center">{{movie.title}}</h1>
+    <br><br>
+    <img src="{{movie.posterUrl}}" alt="">
+    <p>{{movie.abstract}}</p>
     <form action="{{route('delete', {}, { qs: {_method : 'DELETE'} })}}" method="POST">
         {{ csrfField() }}
-        <input type="text" >
-        <button type="submit">Submit</button>
+        <button style="background-color:#27282a; color:white;text-align:center;border-radius:10px;padding:15px;" type="submit">Delete movie</button>
     </form>
 </body>
 </html>
