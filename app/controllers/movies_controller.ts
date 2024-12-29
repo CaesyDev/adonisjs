@@ -34,7 +34,7 @@ export default class MoviesController {
       await redisCache.set("test-movie", newMovie);
     }
     
-    newMovie.greet("hello world");
+    // newMovie.greet("hello world");
 
     return response.json({
       movies : await MovieService.getMovies(),
@@ -55,5 +55,9 @@ export default class MoviesController {
     console.log("delete test")
     //go back to previous page
     return response.redirect().back();
+  }
+
+  crudOperations({response} : HttpContext){
+    
   }
 }

@@ -1,34 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Movie extends BaseModel {
+export default class Cineast extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare statusId: number
+  declare firstName: string
 
   @column()
-  declare writerId: number
+  declare lastName: string
 
   @column()
-  declare directorId: number
-
-  @column()
-  declare title: string
-
-  @column()
-  declare summary: string
-
-  @column()
-  declare abstract: string
-
-  @column()
-  declare slug: string
-
-  @column()
-  declare posterUrl: string
-
+  declare headShotUrl: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
