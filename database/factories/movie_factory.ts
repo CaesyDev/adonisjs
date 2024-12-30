@@ -7,7 +7,7 @@ export const MovieFactory = factory
     return {
       statusId : MovieStatuses.WRITING,
       writerId: 1,
-      directorId : 1,
+      directorId : 2,
       title : faker.music.songName(),
       slug : faker.string.uuid(),
       summary : faker.lorem.sentence(),

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.integer("writer_id").unsigned().references("cineasts.id").notNullable()
       table.integer("director_id").unsigned().references("cineasts.id").notNullable()
       table.string("title", 100).notNullable()
-      table.string("slug", 200).notNullable().unique()
+      table.string("slug", 200).notNullable()
       table.string("summary", 200).notNullable().defaultTo("")
       table.text("abstract")
       table.string("poster_url").notNullable().defaultTo("")

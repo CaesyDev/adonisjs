@@ -9,6 +9,11 @@ import MovieVm from '#view_models/movie';
 
 export default class MoviesController {
 
+  async queryScope({response} : HttpContext) {
+    const movies: Movie[] = await Movie.query().withScopes(scope => scope.released());
+    return response.json(movies);
+  }
+
   async showMovies({view} : HttpContext) {
     const movies: Movie[] = await Movie.all();
 
