@@ -17,3 +17,4 @@ router.get('/json', [MoviesController, 'jsonView']);
 router.get('/cache', [MoviesController, 'cacheTest']);
 router.delete("/delete", [MoviesController, 'deleteTest']).as("delete");
 router.get('/query', [MoviesController, 'queryScope']);
+router.get("/lazy", [MoviesController, 'lazy']);

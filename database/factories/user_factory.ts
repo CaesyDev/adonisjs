@@ -1,6 +1,7 @@
 import factory from '@adonisjs/lucid/factories'
 import User from '#models/user'
 import Roles from '#enums/roles'
+import { ProfileFactory } from './profile_factory.js'
 
 export const UserFactory = factory
   .define(User, async ({ faker }) => {
@@ -11,5 +12,5 @@ export const UserFactory = factory
       email: faker.internet.email(),
       password: faker.internet.password()
     }
-  })
+  }).relation('profile', () => ProfileFactory)
   .build()

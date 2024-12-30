@@ -1,5 +1,6 @@
 import factory from '@adonisjs/lucid/factories'
 import Profile from '#models/profile'
+import { UserFactory } from './user_factory.js'
 
 export const ProfileFactory = factory
   .define(Profile, async ({ faker }) => {
@@ -7,5 +8,5 @@ export const ProfileFactory = factory
       userId: 1,
       description: faker.lorem.sentence(),
     }
-  })
+  }).relation('user', () => UserFactory)
   .build()

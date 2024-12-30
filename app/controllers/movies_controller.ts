@@ -5,9 +5,20 @@ import Movie from '#models/movie';
 import cache from '#services/cache_service';
 import redisCache from '#services/rediscache_service';
 import MovieVm from '#view_models/movie';
+import User from '#models/user';
 // import db from '@adonisjs/lucid/services/db'
 
 export default class MoviesController {
+
+
+  async lazy({response} : HttpContext){
+    const user = await User.find(1);
+    // await user?.load('profile');
+    const b = user?.serialize()
+    response.json({
+      user, b
+    });
+  }
 
   async queryScope({response} : HttpContext) {
     const movies: Movie[] = await Movie.query().withScopes(scope => scope.released());
