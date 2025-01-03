@@ -8,15 +8,12 @@ export default class LoginController {
     return view.render("login");
   }
   
-  async store({request, response}: HttpContext) {
+  async store({request, response, auth}: HttpContext) {
     const {email, password} = await request.validateUsing(loginValidator);
-    const user = await User.findBy('email', email);
-    // if(user){
-    //   if(user.password === )
-    // }
-    
-
-    return response.redirect().toRoute("home");
+    const user = await User.verifyCredentials(email, password);
+    //create session
+    await auth.use("web").login(user)
+    return response.redirect().toPath("/");
   }
   
 }

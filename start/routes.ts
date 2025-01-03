@@ -12,6 +12,7 @@ import MoviesController from '#controllers/movies_controller';
 import RegisterController from '#controllers/auth/register_controller';
 import LoginController from '#controllers/auth/login_controller';
 import { middleware } from './kernel.js';
+import LogoutController from '#controllers/auth/logout_controller';
 
 router.get("/", [MoviesController, 'showMovies']).as("home");
 router.get("/movie/:slug", [MoviesController, 'singleMovie']).as("movie");
@@ -24,7 +25,8 @@ router.get("/lazy", [MoviesController, 'lazy']);
 
 router.group(() => {
     router.get("/register", [RegisterController, 'register']).as("register.name").use(middleware.guest())
-    router.post("/register", [RegisterController, 'store']).as("register.store")
-    router.get("/login", [LoginController, 'show']).as("login.show").as("login.show")
-    router.post("/login", [LoginController, 'store']).as("login.store").as("login.store")
+    router.post("/register", [RegisterController, 'store']).as("register.store").use(middleware.guest())
+    router.get("/login", [LoginController, 'show']).as("login.show").as("login.show").use(middleware.guest())
+    router.post("/login", [LoginController, 'store']).as("login.store").as("login.store").use(middleware.guest())
+    router.post("/logout", [LogoutController, 'handle']).as("logout").use(middleware.auth())
 }).prefix("/auth").as("auth");

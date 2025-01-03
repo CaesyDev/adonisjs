@@ -8,17 +8,13 @@
 </head>
 <body>
     <h1>Register</h1>
-    {{inspect(flashMessages)}}
+    @error('E_INVALID_CREDENTIALS')
+        <p role="alert"> {{$message}} </p>
+    @end
     <form action="{{route('auth.login.store')}}" method="post">
         {{ csrfField() }}
-        <input type="text" name="email" placeholder="email"><br>
-        @if (flashMessages.has('errors.email'))
-            {{flashMessages.get('errors.email').join(', ')}}
-        @endif
+        <input type="text" name="email" placeholder="email" value="{{old('email') || ""}}"><br>
         <input type="password" name="password" placeholder="Password"><br>
-        @if (flashMessages.has('errors.password'))
-            {{flashMessages.get('errors.password').join(', ')}}
-        @endif
         <button type="submit">Login</button>
     </form>
 
