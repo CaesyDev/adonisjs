@@ -30,3 +30,13 @@ router.group(() => {
     router.post("/login", [LoginController, 'store']).as("login.store").as("login.store").use(middleware.guest())
     router.post("/logout", [LogoutController, 'handle']).as("logout").use(middleware.auth())
 }).prefix("/auth").as("auth");
+
+
+
+router.group(() => {
+
+    router.get("/", (ctx) => {
+        return ctx.response.send({ message: "Welcome to the admin panel" });
+    }).as("adminhome")
+
+}).prefix("/admin").as("admin").use(middleware.admin());
