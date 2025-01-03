@@ -25,12 +25,12 @@ export default class MoviesController {
     return response.json(movies);
   }
 
-  async showMovies({view} : HttpContext) {
+  async showMovies({view, auth} : HttpContext) {
     const movies: Movie[] = await Movie.all();
 
     // const data = await db.knexRawQuery("SELECT * FROM users");
     // return data;
-
+    await auth.check();
     return view.render("pages/movies", {movies});
   }
 

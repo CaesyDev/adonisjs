@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+
+    @if(auth.user)
+        {{ auth.user.fullName }}
+    @endif
     
     <div style="display:flex; flex-wrap:wrap; justify-content:center;">
         @each((movie, index) in movies)
