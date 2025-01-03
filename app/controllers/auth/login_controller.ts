@@ -9,10 +9,10 @@ export default class LoginController {
   }
   
   async store({request, response, auth}: HttpContext) {
-    const {email, password} = await request.validateUsing(loginValidator);
+    const {email, password,isRememberMe} = await request.validateUsing(loginValidator);
     const user = await User.verifyCredentials(email, password);
     //create session
-    await auth.use("web").login(user)
+    await auth.use("web").login(user, isRememberMe)
     return response.redirect().toPath("/");
   }
   

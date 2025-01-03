@@ -15,6 +15,7 @@
         {{ csrfField() }}
         <input type="text" name="email" placeholder="email" value="{{old('email') || ""}}"><br>
         <input type="password" name="password" placeholder="Password"><br>
+        <input type="checkbox" name="isRememberMe">
         <button type="submit">Login</button>
     </form>
 
